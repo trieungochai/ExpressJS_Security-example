@@ -1,9 +1,12 @@
 const express = require("express");
 const https = require("https");
 const fs = require("fs");
+const helmet = require("helmet");
 const path = require("path");
 
 const app = express();
+
+app.use(helmet());
 
 const PORT = process.env.PORT || 3000;
 
