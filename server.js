@@ -3,12 +3,17 @@ const https = require("https");
 const fs = require("fs");
 const helmet = require("helmet");
 const path = require("path");
-
+require("dotenv").config();
 const app = express();
 
 app.use(helmet());
 
 const PORT = process.env.PORT || 3000;
+
+const config = {
+  CLIENT_ID: process.env.CLIENT_ID,
+  CLIENT_SECRET: process.env.CLIENT_SECRET,
+};
 
 function checkLoggedIn(req, res, next) {
   const isLoggedIn = true; // TODO
@@ -25,9 +30,7 @@ app.get("/auth/google", (req, res) => {});
 
 app.get("/auth/google/callback", (req, res) => {});
 
-app.get("/auth/logout", (req, res) => {
-  
-});
+app.get("/auth/logout", (req, res) => {});
 
 app.get("/secret", checkLoggedIn, (req, res) => {
   return res.status(200).send("Your personal secret value is 69!");
