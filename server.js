@@ -53,7 +53,7 @@ passport.serializeUser((user, done) => {
 // Read the session from the cookie
 passport.deserializeUser((obj, done) => {
   // User.findById(id).then((user) => {
-    // done(null, user);
+  // done(null, user);
   // });
   done(null, obj);
 });
@@ -95,7 +95,10 @@ app.get("/auth/google/failure", (req, res) => {
   return res.send("Failed to login!");
 });
 
-app.get("/auth/logout", (req, res) => {});
+app.get("/auth/logout", (req, res) => {
+  req.logOut(); // Removes req.user and clears any logged in session
+  return res.redirect("/");
+});
 
 app.get("/secret", checkLoggedIn, (req, res) => {
   return res.status(200).send("Your personal secret value is 69!");
