@@ -59,7 +59,7 @@ passport.deserializeUser((obj, done) => {
 });
 
 function checkLoggedIn(req, res, next) {
-  const isLoggedIn = true; // TODO
+  const isLoggedIn = req.isAuthenticated() && req.user; // TODO
   if (!isLoggedIn) {
     return res.status(401).json({
       error: "You must log in!",
